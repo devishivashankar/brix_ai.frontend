@@ -1,7 +1,7 @@
 export const SITE_NAME = "Brix AI";
 export const SITE_DESCRIPTION = "Brix AI: AI solutions provider for mid-sized and emerging enterprises with AI-powered products, real-time analytics, and consulting.";
 export const INTRO_LOGO_TEXT = "Brix AI";
-export const CONTACT_EMAIL = "sales@brixai.in";
+export const CONTACT_EMAIL = "hr@brixai.in";
 
 export type NavItem = {
   title: string;
@@ -24,7 +24,7 @@ export const FOOTER_LINKS = {
     { title: "Terms of Service", href: "/terms-of-service" }, // Placeholder
   ],
   social: [
-    { title: "LinkedIn", href: "https://linkedin.com/company/brixai", external: true },
+    { title: "LinkedIn", href: "https://www.linkedin.com/company/brix-ai-technology", external: true },
     // Add other social links here
   ],
 };
