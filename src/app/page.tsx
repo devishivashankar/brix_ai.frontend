@@ -74,12 +74,25 @@ export default function HomePage() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary/10 via-background to-background">
-        <div className="container mx-auto min-h-[calc(80vh-4rem)] flex flex-col items-center justify-center px-4 text-center md:px-6">
-          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
+      <section className="relative"> {/* Removed gradient, added relative for video positioning */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline // Ensures inline playback on mobile, especially iOS
+          className="absolute inset-0 w-full h-full object-cover -z-20" // Video behind overlay and content
+        >
+          {/* IMPORTANT: Replace this with the actual URL to your video file */}
+          <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div className="absolute inset-0 bg-black/60 -z-10" /> {/* Overlay for text readability */}
+
+        <div className="relative z-0 container mx-auto min-h-[calc(80vh-4rem)] flex flex-col items-center justify-center px-4 text-center md:px-6">
+          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"> {/* Changed text color to white */}
             Unlock Growth with <span className="text-primary">AI-Powered</span> Innovation
           </h1>
-          <p className="mt-6 max-w-3xl text-lg text-muted-foreground md:text-xl">
+          <p className="mt-6 max-w-3xl text-lg text-neutral-200 md:text-xl"> {/* Changed text color to light neutral */}
             Brix AI empowers mid-sized and emerging enterprises with cutting-edge AI products, 
             real-time analytics, and expert consulting to drive efficiency, unlock insights, and 
             accelerate growth in a rapidly evolving digital landscape.
