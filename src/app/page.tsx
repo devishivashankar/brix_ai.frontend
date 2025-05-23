@@ -83,7 +83,7 @@ export default function HomePage() {
           className="absolute inset-0 w-full h-full object-cover -z-20" // Video behind overlay and content
         >
           {/* IMPORTANT: Replace this with the actual URL to your video file */}
-          <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4" />
+          <source src="/home intro.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         <div className="absolute inset-0 bg-black/60 -z-10" /> {/* Overlay for text readability */}
