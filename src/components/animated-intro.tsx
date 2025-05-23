@@ -1,4 +1,4 @@
-"use client";
+ "use client";
 
 import { motion } from 'framer-motion';
 import { INTRO_LOGO_TEXT } from '@/lib/constants';
@@ -10,7 +10,7 @@ type AnimatedIntroProps = {
 export function AnimatedIntro({ onAnimationComplete }: AnimatedIntroProps) {
   return (
     <motion.div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-[#0018FF]" // User specified intro background
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-blue-900" // Changed background to dark blue
       initial={{ opacity: 1 }}
       animate={{ opacity: 1 }} // Keep opacity 1 during logo animation phase
       transition={{ duration: 0.5 }}
