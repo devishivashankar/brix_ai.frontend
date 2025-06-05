@@ -9,6 +9,7 @@ import { Footer } from '@/components/layout/footer';
 import { PageTransitionWrapper } from '@/components/page-transition-wrapper';
 import { Toaster } from "@/components/ui/toaster";
 import { AnimatedIntro } from '@/components/animated-intro';
+import { ChatWidget } from '@/components/chat-widget';
 // INTRO_LOGO_TEXT is used by AnimatedIntro and Navbar, which are client components.
 
 export function RootLayoutClient({ children }: { children: ReactNode }) {
@@ -70,6 +71,7 @@ export function RootLayoutClient({ children }: { children: ReactNode }) {
         </motion.div>
       )}
        <Toaster />
+       <ChatWidget />
     </>
   );
 }

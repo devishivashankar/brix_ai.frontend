@@ -32,7 +32,6 @@ export function Navbar({ isIntroComplete }: NavbarProps) {
       transition={{ duration: 0.5, delay: isIntroComplete ? 0 : 0.2 }} // Delay only if intro just completed
     >
       <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-primary">
-        <Sparkles className="h-6 w-6" />
         <span>{INTRO_LOGO_TEXT}</span>
       </Link>
 
