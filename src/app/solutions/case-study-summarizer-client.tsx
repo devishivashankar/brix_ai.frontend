@@ -1,13 +1,24 @@
-"use client";
+'use client';
 
-import { useFormState, useFormStatus } from "react-dom";
-import { useEffect } from "react";
+import { useActionState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Loader2, CheckCircle, AlertCircle } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "@/components/ui/alert";
+import { Loader2, CheckCircle } from "lucide-react";
 import { submitCaseStudyForSummary, type FormState } from "./actions";
 import { useToast } from "@/hooks/use-toast";
 
@@ -15,22 +26,29 @@ const initialState: FormState = {
   message: "",
 };
 
-function SubmitButton() {
-  const { pending } = useFormStatus();
+function SubmitButton({ loading }: { loading: boolean }) {
   return (
-    <Button type="submit" disabled={pending} className="w-full md:w-auto">
-      {pending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+    <Button type="submit" disabled={loading} className="w-full md:w-auto">
+      {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
       Generate Summary
     </Button>
   );
 }
 
 export function CaseStudySummarizerClient() {
-  const [state, formAction] = useFormState(submitCaseStudyForSummary, initialState);
+  const [loading, setLoading] = useState(false);
+
+  const [state, formAction] = useActionState(async (prevState, formData) => {
+    setLoading(true);
+    const result = await submitCaseStudyForSummary(prevState, formData);
+    setLoading(false);
+    return result;
+  }, initialState);
+
   const { toast } = useToast();
 
   useEffect(() => {
-    if (state.message && !state.summary && !state.errors) { // general message or error
+    if (state.message && !state.summary && !state.errors) {
       toast({
         title: state.message.startsWith("Error:") ? "Error" : "Notification",
         description: state.message,
@@ -38,7 +56,7 @@ export function CaseStudySummarizerClient() {
       });
     }
     if (state.summary) {
-       toast({
+      toast({
         title: "Success!",
         description: "Summary generated.",
         variant: "default",
@@ -72,7 +90,7 @@ export function CaseStudySummarizerClient() {
               </p>
             )}
           </div>
-          
+
           {state.summary && (
             <Alert variant="default" className="bg-primary/5">
               <CheckCircle className="h-5 w-5 text-primary" />
@@ -84,7 +102,7 @@ export function CaseStudySummarizerClient() {
           )}
         </CardContent>
         <CardFooter>
-          <SubmitButton />
+          <SubmitButton loading={loading} />
         </CardFooter>
       </form>
     </Card>

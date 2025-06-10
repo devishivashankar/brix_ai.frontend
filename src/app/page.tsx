@@ -90,7 +90,7 @@ export default function HomePage() {
 
         <div className="relative z-0 container mx-auto min-h-[calc(80vh-4rem)] flex flex-col items-center justify-center px-4 text-center md:px-6">
           <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"> {/* Changed text color to white */}
-            Unlock Growth with AI-Powered Innovation
+            Unlock Growth with <span className="text-primary">AI-Powered</span> Innovation
           </h1>
           <p className="mt-6 max-w-3xl text-lg text-neutral-200 md:text-xl"> {/* Changed text color to light neutral */}
             Brix AI empowers mid-sized and emerging enterprises with cutting-edge AI products, 
@@ -155,28 +155,22 @@ export default function HomePage() {
           </div>
           <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {featuredProducts.map((product) => (
-              <Card key={product.title} className="group overflow-hidden border-0 shadow-md hover:shadow-2xl transition-all duration-500 bg-card/50 backdrop-blur-sm">
-                <div className="relative overflow-hidden">
-                  <Image
-                    src={product.image}
-                    alt={product.title}
-                    width={600}
-                    height={400}
-                    className="aspect-[3/2] w-full object-contain bg-gradient-to-br from-muted to-muted/50 group-hover:scale-105 transition-transform duration-500"
-                    data-ai-hint={product.imageHint}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-xl font-semibold group-hover:text-primary transition-colors duration-300">{product.title}</CardTitle>
+              <Card key={product.title} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <Image
+                  src={product.image}
+                  alt={product.title}
+                  width={600}
+                  height={400}
+                  className="h-48 w-full object-cover"
+                  data-ai-hint={product.imageHint}
+                />
+                <CardHeader>
+                  <CardTitle className="text-xl">{product.title}</CardTitle>
                 </CardHeader>
-                <CardContent className="pt-0 pb-6">
-                  <CardDescription className="text-muted-foreground mb-4 leading-relaxed">{product.description}</CardDescription>
-                  <Button variant="ghost" asChild className="group/btn p-0 h-auto text-primary hover:bg-transparent font-semibold">
-                    <Link href={product.link} className="flex items-center gap-2">
-                      Discover More 
-                      <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
-                    </Link>
+                <CardContent>
+                  <CardDescription>{product.description}</CardDescription>
+                  <Button variant="link" asChild className="mt-4 p-0 text-primary">
+                    <Link href={product.link}>Discover <ArrowRight className="ml-1 h-4 w-4" /></Link>
                   </Button>
                 </CardContent>
               </Card>

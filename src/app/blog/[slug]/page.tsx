@@ -1,25 +1,17 @@
-import type { Metadata, ResolvingMetadata } from 'next';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { sampleBlogPosts } from '../sample-posts';
+import { sampleBlogPosts } from '@/sample-posts';
 import type { BlogPost } from '@/types';
 import { format } from 'date-fns';
 import { CalendarDays, UserCircle } from 'lucide-react';
 import { SITE_NAME } from '@/lib/constants';
 
-type Props = {
-  params: { slug: string };
-};
-
-// Function to fetch blog post data (replace with actual data fetching if needed)
 async function getPost(slug: string): Promise<BlogPost | undefined> {
   return sampleBlogPosts.find((post) => post.slug === slug);
 }
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const post = await getPost(params.slug);
 
   if (!post) {
@@ -38,7 +30,6 @@ export async function generateMetadata(
       type: 'article',
       publishedTime: new Date(post.date).toISOString(),
       authors: post.author ? [post.author] : [],
-      // images: post.image ? [{ url: post.image }] : [],
     },
   };
 }
@@ -49,8 +40,13 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function BlogPostPage({ params }: Props) {
-  const post = await getPost(params.slug);
+export default async function BlogPostPage({
+  params,
+}: {
+  params: { slug: string }; // <-- change here: no Promise
+}) {
+  const { slug } = params; // <-- no await here
+  const post = await getPost(slug);
 
   if (!post) {
     notFound();
@@ -84,8 +80,8 @@ export default async function BlogPostPage({ params }: Props) {
             width={1200}
             height={600}
             className="h-auto w-full object-cover"
-            priority // For LCP
-            data-ai-hint={post.imageHint || "technology article"}
+            priority
+            data-ai-hint={post.imageHint || 'technology article'}
           />
         </div>
       )}
@@ -94,11 +90,6 @@ export default async function BlogPostPage({ params }: Props) {
         className="prose prose-lg max-w-none dark:prose-invert prose-headings:font-semibold prose-a:text-primary hover:prose-a:text-primary/80 prose-img:rounded-md"
         dangerouslySetInnerHTML={{ __html: post.content }}
       />
-
-      {/* Simple "content" for now, should be parsed if markdown */}
-      {/* For a real blog, use a markdown parser like 'react-markdown' or 'next-mdx-remote' */}
-      {/* Example: <ReactMarkdown>{post.content}</ReactMarkdown> */}
-
     </article>
   );
 }

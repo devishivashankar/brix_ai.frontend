@@ -8,21 +8,3 @@ export type BlogPost = {
   imageHint?: string;
   author?: string;
 };
-
-// Chat types
-export interface ChatMessage {
-  id: string;
-  text: string;
-  sender: 'user' | 'bot';
-  timestamp: Date;
-  confidence?: number;
-}
-
-export interface ChatQuestion {
-  question: string;
-}
-
-export interface ChatAnswer {
-  answer: string;
-  confidence?: number;
-}

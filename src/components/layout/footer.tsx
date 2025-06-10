@@ -9,6 +9,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <Link href="/" className="mb-4 flex items-center gap-2 text-xl font-semibold text-primary">
+              <Sparkles className="h-6 w-6" />
               <span>{SITE_NAME}</span>
             </Link>
             <p className="text-sm">

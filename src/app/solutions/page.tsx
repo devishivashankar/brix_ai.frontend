@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Brain, BarChartBig, Users, Lightbulb } from 'lucide-react';
@@ -17,7 +17,7 @@ const solutions = [
     icon: <Brain className="h-12 w-12 text-primary mb-4" />,
     title: "AI Products",
     description: "Leverage our suite of AI-powered products, including no-code automation tools, intelligent invoice processing, and advanced call analytics. We build custom AI solutions tailored to your specific operational needs, enhancing efficiency and driving innovation.",
-    image: "https://placehold.co/600x400.png",
+    image: "/images/offerings/ai-products.png",
     imageHint: "AI interface",
     features: ["No-Code RPA Bots", "Invoice Intelligence", "AI Call Analytics", "Custom AI Development"]
   },
@@ -26,7 +26,7 @@ const solutions = [
     icon: <BarChartBig className="h-12 w-12 text-primary mb-4" />,
     title: "Real-Time Analytical Services",
     description: "Transform your data into a strategic asset with our real-time analytics. We offer interactive dashboards, sophisticated anomaly detection systems, and predictive modeling to provide you with actionable insights for informed decision-making.",
-    image: "https://placehold.co/600x400.png",
+    image: "/images/offerings/real-time-analytics.png",
     imageHint: "data analytics",
     features: ["Custom Dashboards", "Anomaly Detection", "Predictive Modeling", "Data Visualization"]
   },
@@ -35,7 +35,7 @@ const solutions = [
     icon: <Users className="h-12 w-12 text-primary mb-4" />,
     title: "AI Consulting",
     description: "Navigate the complexities of AI adoption with our expert consulting services. We partner with you on market strategy, digital transformation roadmaps, and technology implementation, ensuring your AI initiatives deliver maximum business value.",
-    image: "https://placehold.co/600x400.png",
+    image: "/images/offerings/consulting.png",
     imageHint: "business strategy",
     features: ["AI Strategy & Roadmap", "Digital Transformation", "Technology Implementation", "Performance Optimization"]
   },
