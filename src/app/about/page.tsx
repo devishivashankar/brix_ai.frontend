@@ -149,6 +149,20 @@ const teamMembers = [
     image: "/images/team/umang.jpg",
     linkedin: "https://linkedin.com/in/umangkataria",
   },
+  {
+    name: "Durgesh Singh",
+    role: "Market Research Expert",
+    institution: "IIM Indore",
+    image: "/images/team/durgesh_singh.jpeg",
+    linkedin: "https://www.linkedin.com/in/durgesh1506/",
+  },
+  {
+    name: "Geetheswar",
+    role: "Frontend Developer",
+    institution: "IIT Palakkad",
+    image: "/images/team/geetheswar.jpeg",
+    linkedin: "https://linkedin.com/in/geetheswar",
+  },
 ];
 
 export default function AboutPage() {
