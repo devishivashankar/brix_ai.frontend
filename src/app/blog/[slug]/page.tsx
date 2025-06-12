@@ -11,6 +11,13 @@ async function getPost(slug: string): Promise<BlogPost | undefined> {
   return sampleBlogPosts.find((post) => post.slug === slug);
 }
 
+// Generate static params for all blog posts
+export async function generateStaticParams() {
+  return sampleBlogPosts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const post = await getPost(params.slug);
 
@@ -32,12 +39,6 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       authors: post.author ? [post.author] : [],
     },
   };
-}
-
-export async function generateStaticParams() {
-  return sampleBlogPosts.map((post) => ({
-    slug: post.slug,
-  }));
 }
 
 export default async function BlogPostPage({

@@ -1,8 +1,7 @@
-"use server";
-
+// Client-side form validation for static export
 import { z } from "zod";
 
-const ContactSchema = z.object({
+export const ContactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters."),
   email: z.string().email("Invalid email address."),
   message: z.string().min(10, "Message must be at least 10 characters.").max(1000, "Message must be less than 1000 characters."),
@@ -18,15 +17,13 @@ export type ContactFormState = {
   success?: boolean;
 };
 
-export async function submitContactForm(
-  prevState: ContactFormState,
-  formData: FormData
-): Promise<ContactFormState> {
-  const validatedFields = ContactSchema.safeParse({
-    name: formData.get("name"),
-    email: formData.get("email"),
-    message: formData.get("message"),
-  });
+// Client-side form handler for static hosting
+export function validateContactForm(formData: {
+  name: string;
+  email: string;
+  message: string;
+}): ContactFormState {
+  const validatedFields = ContactSchema.safeParse(formData);
 
   if (!validatedFields.success) {
     return {
@@ -36,10 +33,14 @@ export async function submitContactForm(
     };
   }
 
-  // In a real application, you would send an email, save to a CRM, or store in a database.
-  console.log("Contact Form Submitted (Simulated):", validatedFields.data);
+  // For static hosting, you would typically:
+  // 1. Use a service like Formspree, Netlify Forms, or EmailJS
+  // 2. Send data to an external API endpoint
+  // 3. Use a serverless function (Vercel Functions, Netlify Functions)
+  
+  // For now, we'll simulate success
+  console.log("Contact Form Submitted (Client-side):", validatedFields.data);
 
-  // Simulate successful submission
   return {
     message: `Thank you for your message, ${validatedFields.data.name}! We will get back to you soon.`,
     success: true,

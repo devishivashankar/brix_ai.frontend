@@ -1,14 +1,12 @@
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
-import { useEffect, useRef } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Loader2, CheckCircle } from "lucide-react";
-import { submitContactForm, type ContactFormState } from "./actions";
+import { Loader2 } from "lucide-react";
+import { validateContactForm, type ContactFormState } from "./actions";
 import { useToast } from "@/hooks/use-toast";
 
 const initialState: ContactFormState = {
@@ -16,36 +14,43 @@ const initialState: ContactFormState = {
   success: false,
 };
 
-function SubmitButton() {
-  const { pending } = useFormStatus();
-  return (
-    <Button type="submit" disabled={pending} className="w-full">
-      {pending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-      Send Message
-    </Button>
-  );
-}
-
 export function ContactFormClient() {
-  const [state, formAction] = useFormState(submitContactForm, initialState);
+  const [state, setState] = useState<ContactFormState>(initialState);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-  const formRef = useRef<HTMLFormElement>(null);
 
-  useEffect(() => {
-    if (state.message) {
-      toast({
-        title: state.success ? "Message Sent!" : "Error",
-        description: state.message,
-        variant: state.success ? "default" : "destructive",
-      });
-      if (state.success) {
-        formRef.current?.reset();
-      }
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+
+    const formData = new FormData(event.currentTarget);
+    const data = {
+      name: formData.get("name") as string,
+      email: formData.get("email") as string,
+      message: formData.get("message") as string,
+    };
+
+    // Simulate async processing
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    const result = validateContactForm(data);
+    setState(result);
+
+    toast({
+      title: result.success ? "Message Sent!" : "Error",
+      description: result.message,
+      variant: result.success ? "default" : "destructive",
+    });
+
+    if (result.success) {
+      event.currentTarget.reset();
     }
-  }, [state, toast]);
+
+    setIsSubmitting(false);
+  };
 
   return (
-    <form ref={formRef} action={formAction} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6">
       <div>
         <Label htmlFor="name">Full Name</Label>
         <Input id="name" name="name" type="text" placeholder="Your Full Name" required className="mt-1" />
@@ -71,7 +76,10 @@ export function ContactFormClient() {
         {state.errors?.message && <p className="text-sm text-destructive mt-1">{state.errors.message.join(", ")}</p>}
       </div>
       
-      <SubmitButton />
+      <Button type="submit" disabled={isSubmitting} className="w-full">
+        {isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+        Send Message
+      </Button>
     </form>
   );
 }

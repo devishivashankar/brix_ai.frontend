@@ -2,6 +2,8 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   output: 'export',
+  trailingSlash: true,
+  skipTrailingSlashRedirect: true,
 
   typescript: {
     ignoreBuildErrors: true,
@@ -12,6 +14,7 @@ const nextConfig: NextConfig = {
   },
 
   images: {
+    unoptimized: true, // Required for static export
     remotePatterns: [
       {
         protocol: 'https',
@@ -24,4 +27,3 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
-

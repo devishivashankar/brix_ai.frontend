@@ -1,10 +1,9 @@
-"use server";
-
+// Client-side form validation for static export
 import { z } from "zod";
 
 // For file uploads, a more robust solution (e.g., cloud storage) would be needed in production.
 // This is a simplified version.
-const ApplicationSchema = z.object({
+export const ApplicationSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters."),
   email: z.string().email("Invalid email address."),
   // resume: z.instanceof(File).optional(), // File handling is complex with server actions alone
@@ -25,22 +24,15 @@ export type CareerFormState = {
   success?: boolean;
 };
 
-export async function submitApplication(
-  prevState: CareerFormState,
-  formData: FormData
-): Promise<CareerFormState> {
-  
-  // Simulate file handling by just getting the name
-  const resumeFile = formData.get("resume") as File | null;
-  const resumeFileName = resumeFile?.name;
-
-  const validatedFields = ApplicationSchema.safeParse({
-    name: formData.get("name"),
-    email: formData.get("email"),
-    resumeFileName: resumeFileName,
-    message: formData.get("message"),
-    role: formData.get("role") || undefined,
-  });
+// Client-side form handler for static hosting
+export function validateApplication(formData: {
+  name: string;
+  email: string;
+  resumeFileName?: string;
+  message: string;
+  role?: string;
+}): CareerFormState {
+  const validatedFields = ApplicationSchema.safeParse(formData);
 
   if (!validatedFields.success) {
     return {
@@ -50,10 +42,12 @@ export async function submitApplication(
     };
   }
 
-  // In a real application, you would:
-  // 1. Upload the resume to a storage service (e.g., Firebase Storage, AWS S3)
-  // 2. Save the application details (including resume URL) to a database
-  console.log("Application Submitted (Simulated):", validatedFields.data);
+  // For static hosting, you would typically:
+  // 1. Use a service like Formspree, Netlify Forms, or EmailJS
+  // 2. Send data to an external API endpoint
+  // 3. Use a serverless function (Vercel Functions, Netlify Functions)
+  
+  console.log("Application Submitted (Client-side):", validatedFields.data);
 
   // Simulate successful submission
   return {

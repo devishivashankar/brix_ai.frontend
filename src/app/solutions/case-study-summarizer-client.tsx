@@ -1,7 +1,6 @@
 'use client';
 
-import { useActionState } from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -19,54 +18,54 @@ import {
   AlertTitle,
 } from "@/components/ui/alert";
 import { Loader2, CheckCircle } from "lucide-react";
-import { submitCaseStudyForSummary, type FormState } from "./actions";
+import { validateCaseStudyForm, type FormState } from "./actions";
 import { useToast } from "@/hooks/use-toast";
 
 const initialState: FormState = {
   message: "",
 };
 
-function SubmitButton({ loading }: { loading: boolean }) {
-  return (
-    <Button type="submit" disabled={loading} className="w-full md:w-auto">
-      {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-      Generate Summary
-    </Button>
-  );
-}
-
 export function CaseStudySummarizerClient() {
-  const [loading, setLoading] = useState(false);
-
-  const [state, formAction] = useActionState(async (prevState, formData) => {
-    setLoading(true);
-    const result = await submitCaseStudyForSummary(prevState, formData);
-    setLoading(false);
-    return result;
-  }, initialState);
-
+  const [state, setState] = useState<FormState>(initialState);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  useEffect(() => {
-    if (state.message && !state.summary && !state.errors) {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+
+    const formData = new FormData(event.currentTarget);
+    const data = {
+      document: formData.get("documentText") as string,
+    };
+
+    // Simulate async processing
+    await new Promise(resolve => setTimeout(resolve, 2000));
+
+    const result = validateCaseStudyForm(data);
+    setState(result);
+
+    if (result.message && !result.summary && !result.errors) {
       toast({
-        title: state.message.startsWith("Error:") ? "Error" : "Notification",
-        description: state.message,
-        variant: state.message.startsWith("Error:") ? "destructive" : "default",
+        title: result.message.startsWith("Error:") ? "Error" : "Notification",
+        description: result.message,
+        variant: result.message.startsWith("Error:") ? "destructive" : "default",
       });
     }
-    if (state.summary) {
+    if (result.summary) {
       toast({
         title: "Success!",
         description: "Summary generated.",
         variant: "default",
       });
     }
-  }, [state, toast]);
+
+    setIsSubmitting(false);
+  };
 
   return (
     <Card className="max-w-2xl mx-auto shadow-lg">
-      <form action={formAction}>
+      <form onSubmit={handleSubmit}>
         <CardHeader>
           <CardTitle>Test Our Summarizer AI</CardTitle>
           <CardDescription>
@@ -95,14 +94,17 @@ export function CaseStudySummarizerClient() {
             <Alert variant="default" className="bg-primary/5">
               <CheckCircle className="h-5 w-5 text-primary" />
               <AlertTitle className="font-semibold text-primary">Generated Summary</AlertTitle>
-              <AlertDescription className="text-foreground">
+              <AlertDescription className="text-foreground whitespace-pre-line">
                 {state.summary}
               </AlertDescription>
             </Alert>
           )}
         </CardContent>
         <CardFooter>
-          <SubmitButton loading={loading} />
+          <Button type="submit" disabled={isSubmitting} className="w-full md:w-auto">
+            {isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+            Generate Summary
+          </Button>
         </CardFooter>
       </form>
     </Card>

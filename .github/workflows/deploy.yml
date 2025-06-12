@@ -29,9 +29,6 @@ jobs:
       - name: Build static files
         run: npm run build
 
-      - name: Export static HTML
-        run: npm run export
-
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
