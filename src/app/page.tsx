@@ -90,7 +90,7 @@ export default function HomePage() {
 
         <div className="relative z-0 container mx-auto min-h-[calc(80vh-4rem)] flex flex-col items-center justify-center px-4 text-center md:px-6">
           <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"> {/* Changed text color to white */}
-            Unlock Growth with <span className="text-primary">AI-Powered</span> Innovation
+            Unlock Growth with AI-Powered Innovation
           </h1>
           <p className="mt-6 max-w-3xl text-lg text-neutral-200 md:text-xl"> {/* Changed text color to light neutral */}
             Brix AI empowers mid-sized and emerging enterprises with cutting-edge AI products, 
