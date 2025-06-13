@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { ContactFormClient } from './contact-form-client';
-import { CONTACT_EMAIL } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Contact Us',
@@ -45,8 +44,8 @@ export default function ContactPage() {
                     <Mail className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-medium text-foreground">Email Us</h3>
-                      <a href={`mailto:${CONTACT_EMAIL}`} className="text-muted-foreground hover:text-primary hover:underline break-all">
-                        {CONTACT_EMAIL}
+                      <a href="mailto:solutions@brixai.in" className="text-muted-foreground hover:text-primary hover:underline break-all">
+                        solutions@brixai.in
                       </a>
                     </div>
                   </div>
@@ -54,7 +53,7 @@ export default function ContactPage() {
                     <Phone className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
                     <div>
                       <h3 className="font-medium text-foreground">Call Us</h3>
-                      <p className="text-muted-foreground">+91-XXX-XXXXXXX (Placeholder)</p>
+                      <p className="text-muted-foreground">+91-99073 29360 </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
@@ -62,9 +61,9 @@ export default function ContactPage() {
                     <div>
                       <h3 className="font-medium text-foreground">Our Office</h3>
                       <p className="text-muted-foreground">
-                        Brix AI Headquarters <br />
-                        123 Tech Park, Innovation Drive <br />
-                        Hyderabad, Telangana, India (Placeholder)
+                        Porwal Road, Lohegaon<br />
+                        Pune - 411047<br />
+                        Maharastra, India
                       </p>
                     </div>
                   </div>
@@ -75,13 +74,18 @@ export default function ContactPage() {
             <div>
               <h3 className="text-xl font-semibold text-foreground mb-3">Find Us On Map</h3>
               <div className="aspect-video overflow-hidden rounded-lg border shadow-md">
-                {/* Placeholder for Google Maps iframe. Replace with actual iframe code. */}
-                {/* Example: <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!..." width="100%" height="100%" style={{border:0}} allowFullScreen loading="lazy"></iframe> */}
-                <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
-                  Google Maps iframe will be here. (Placeholder for https://placehold.co/600x400)
-                   <img src="https://placehold.co/600x338.png" alt="Map placeholder" className="w-full h-full object-cover" data-ai-hint="map location" />
-                </div>
+                <iframe
+                  src="https://www.google.com/maps?q=JW45%2BCXH%20Pune,%20Maharashtra&output=embed"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Brix AI Location"
+                ></iframe>
               </div>
+              <p className="text-muted-foreground mt-2 text-sm">Location Code: <strong>JW45+CXH Pune, Maharashtra</strong></p>
             </div>
           </div>
         </div>

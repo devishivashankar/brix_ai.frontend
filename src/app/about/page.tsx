@@ -173,8 +173,10 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 py-16 text-center md:px-6 lg:py-24">
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">Who We Are</h1>
           <p className="mt-6 max-w-3xl mx-auto text-lg text-primary-foreground/80">
-            Brix AI is a dynamic team of AI experts, data scientists, and strategists passionate
-            about harnessing artificial intelligence for growth, efficiency, and innovation.
+          Brix AI is a dedicated and dynamic team of AI experts, data scientists, and strategic professionals, 
+          united by a shared passion for leveraging artificial intelligence to support growth, drive efficiency, and foster innovation.
+           With deep respect for the unique challenges and goals of each organization, we collaborate closely with our partners to design thoughtful, intelligent solutions that create lasting impact.
+            At Brix AI, we are committed to advancing technology with integrity, purpose, and a human-centered approach
           </p>
         </div>
       </section>
@@ -184,8 +186,11 @@ export default function AboutPage() {
         <div className="mx-auto max-w-3xl rounded-lg bg-muted p-8 text-center shadow-xl">
           <Target className="mx-auto mb-4 h-12 w-12 text-primary" />
           <h2 className="text-2xl font-semibold italic text-foreground md:text-3xl">
-            “We empower businesses to unlock data-driven decisions, automate operations, and achieve
-            sustainable growth through intelligent technology and strategic partnership.”
+          At Brix AI, we respectfully support and empower businesses to make informed, data-driven decisions, automate complex operations, and pursue sustainable, long-term growth.
+           By combining cutting-edge artificial intelligence with strategic insight, we offer more than just technology—we provide trusted partnership.
+            Our team is committed to working collaboratively, listening closely, and delivering intelligent solutions tailored to each organization’s unique needs and values.
+             With integrity at the heart of all we do, we aim to contribute meaningfully to our clients' success in an evolving digital world.
+
           </h2>
           <p className="mt-4 text-muted-foreground">- The Brix AI Team</p>
         </div>
