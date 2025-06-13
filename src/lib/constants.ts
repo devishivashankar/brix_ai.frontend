@@ -1,7 +1,7 @@
 export const SITE_NAME = "Brix AI";
 export const SITE_DESCRIPTION = "Brix AI: AI solutions provider for mid-sized and emerging enterprises with AI-powered products, real-time analytics, and consulting.";
 export const INTRO_LOGO_TEXT = "Brix AI";
-export const CONTACT_EMAIL = "hr@brixai.in";
+export const CONTACT_EMAIL = "solutions@brixai.in";
 
 export type NavItem = {
   title: string;
